@@ -15,7 +15,7 @@ Windows 10 and 11 only. The repairs are done by Windows' own 3D printing engine 
 
 ## Install
 
-Run `3mfBatchRepair-setup.exe`. It installs for your user only, with no admin rights needed. It isn't code-signed, so Windows may warn you: choose **More info → Run anyway**.
+Download [`3mfBatchRepair-setup.exe`](https://github.com/burritoCoding/3mfBatchRepair/releases/latest/download/3mfBatchRepair-setup.exe) from the [latest release](https://github.com/burritoCoding/3mfBatchRepair/releases/latest) and run it. It installs for your user only, with no admin rights needed. It isn't code-signed, so Windows may warn you: choose **More info → Run anyway**.
 
 You can also just copy the exes anywhere and run them.
 
