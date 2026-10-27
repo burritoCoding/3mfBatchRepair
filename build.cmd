@@ -3,6 +3,7 @@ rem Builds the 3mfBatchRepair tools with the C# compiler that ships with Windows
 rem   3mfBatchRepair.exe        command-line repair
 rem   3mfBatchRepair-gui.exe    repair window, and the target of the right-click menu
 rem   3mfMeshSplit.exe          splits files into one STL per separate part
+rem   3mfMeshSplit-gui.exe      the same in a window
 rem Compiling the repair tools needs the Windows 10 SDK's union Windows.winmd; running them needs nothing extra.
 rem An exe that's in use (e.g. a batch still running) is reported and skipped; the others still build.
 setlocal
@@ -30,8 +31,11 @@ set SPLIT="%SRC%\SplitCore.cs" "%SRC%\MeshIO.cs" "%SRC%\Util.cs"
 %CSC% /target:exe /out:"%~dp03mfMeshSplit.exe" %IO% "%SRC%\Split.cs" %SPLIT%
 if errorlevel 1 set FAILED=%FAILED% 3mfMeshSplit.exe
 
+%CSC% /target:winexe /out:"%~dp03mfMeshSplit-gui.exe" %IO% /r:"%FW%\System.Windows.Forms.dll" /r:"%FW%\System.Drawing.dll" "%SRC%\SplitGui.cs" "%SRC%\GuiKit.cs" %SPLIT%
+if errorlevel 1 set FAILED=%FAILED% 3mfMeshSplit-gui.exe
+
 if defined FAILED (
   echo not built:%FAILED%
   exit /b 1
 )
-echo built 3mfBatchRepair.exe, 3mfBatchRepair-gui.exe and 3mfMeshSplit.exe
+echo built 3mfBatchRepair.exe, 3mfBatchRepair-gui.exe, 3mfMeshSplit.exe and 3mfMeshSplit-gui.exe
