@@ -1,7 +1,8 @@
 @echo off
-rem Builds the 3mfBatchRepair tool with the C# compiler that ships with Windows (.NET Framework 4.x):
+rem Builds the 3mfBatchRepair tools with the C# compiler that ships with Windows (.NET Framework 4.x):
 rem   3mfBatchRepair.exe        command-line repair
-rem Compiling the repair tool needs the Windows 10 SDK's union Windows.winmd; running it needs nothing extra.
+rem   3mfBatchRepair-gui.exe    repair window, and the target of the right-click menu
+rem Compiling the repair tools needs the Windows 10 SDK's union Windows.winmd; running them needs nothing extra.
 rem An exe that's in use (e.g. a batch still running) is reported and skipped; the others still build.
 setlocal
 set FW=%WINDIR%\Microsoft.NET\Framework64\v4.0.30319
@@ -21,8 +22,11 @@ set FAILED=
 %CSC% /target:exe /out:"%~dp03mfBatchRepair.exe" %IO% %WINRT% "%SRC%\Cli.cs" %REPAIR%
 if errorlevel 1 set FAILED=%FAILED% 3mfBatchRepair.exe
 
+%CSC% /target:winexe /out:"%~dp03mfBatchRepair-gui.exe" %IO% %WINRT% /r:"%FW%\System.Windows.Forms.dll" /r:"%FW%\System.Drawing.dll" "%SRC%\Gui.cs" "%SRC%\GuiKit.cs" %REPAIR%
+if errorlevel 1 set FAILED=%FAILED% 3mfBatchRepair-gui.exe
+
 if defined FAILED (
   echo not built:%FAILED%
   exit /b 1
 )
-echo built 3mfBatchRepair.exe
+echo built 3mfBatchRepair.exe and 3mfBatchRepair-gui.exe
