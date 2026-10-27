@@ -1,3 +1,4 @@
 *.exe
 *.partial
 test-out/
+dist/
