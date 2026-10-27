@@ -50,6 +50,10 @@ Supports and other overlapping pieces stay with their part. Run either tool with
 
 Run `installer\build-installer.cmd` to build the tools and the installer. It uses the C# compiler that ships with Windows and needs the Windows 10 SDK.
 
+## AI Disclosure
+
+This entire application was vibe-coded uusing Claude Code (Opus 5.5).
+
 ## Credits
 
 Icon: "3d-hammer" from [game-icons.net](https://game-icons.net), [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
